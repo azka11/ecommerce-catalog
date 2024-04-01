@@ -1,8 +1,21 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
+import { createRouter, createWebHistory } from 'vue-router';
+// import './style.css'
 import App from './App.vue'
+import MenSection from './components/MenSection.vue'
+import WomenSection from './components/WomenSection.vue'
+import NotAvailable from './components/NotAvailable.vue'
 
-Vue.config.productionTip = false
+const router = createRouter({
+    history: createWebHistory(),
+    routes: [
+      { path: '/', redirect: '/product/men' },
+      { path: '/product/men', component: MenSection },
+      { path: '/product/women', component: WomenSection },
+      { path: '/product/404', component: NotAvailable }
+    ]
+  });
 
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  const app = createApp(App);
+  app.use(router);
+  app.mount('#app');
